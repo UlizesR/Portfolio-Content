@@ -1,0 +1,27 @@
+name: Sync to Portfolio
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update portfolio submodule
+        env:
+          PAT: ${{ secrets.PORTFOLIO_PAT }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git clone --depth 1 "https://x-access-token:${PAT}@github.com/UlizesR/Portfolio.git" portfolio
+          cd portfolio
+          git submodule update --init --recursive
+          git submodule update --remote src/content
+          git add src/content
+          if git diff --staged --quiet; then
+            echo "No submodule changes"
+          else
+            git commit -m "chore: update content submodule"
+            git push
+          fi
