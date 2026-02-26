@@ -2,7 +2,7 @@
 title: "Lapiz Dev Log: An Intro to Lapiz"
 date: "Feb 25, 2026"
 description: "Introducing what Lapiz is and what I want to do with it and its architecture desing"
-image: "../assests/pencil.jpg"
+image: "../../assets/pencil.jpg"
 ---
 
 # What is Lapiz?
